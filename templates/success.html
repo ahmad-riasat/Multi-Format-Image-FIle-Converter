@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="status-card glass-card">
+    <div class="status-icon success-icon">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+    </div>
+    <h2 style="color: var(--accent-success); margin-bottom: 1rem;">Conversion Successful!</h2>
+    <p style="color: var(--text-secondary); margin-bottom: 2rem;">Your file has been processed successfully using our optimized <strong>Strategy Pattern</strong> algorithms.</p>
+    
+    <a href="{{ download_url }}" class="btn-primary btn-success" download style="margin-bottom: 1rem; width: auto; padding: 1rem 2rem;">
+        Download Converted File
+    </a>
+
+    <br>
+    <a href="{% url 'convert_action' %}" class="btn-secondary">
+        ← Convert another file
+    </a>
+</div>
+{% endblock %}

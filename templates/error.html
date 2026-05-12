@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="status-card glass-card" style="border-color: rgba(239, 68, 68, 0.3);">
+    <div class="status-icon error-icon">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+    </div>
+    <h2 style="color: var(--accent-danger); margin-bottom: 1rem;">Conversion Failed</h2>
+    
+    <div style="background: rgba(239, 68, 68, 0.1); padding: 1rem; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.2); margin-bottom: 2rem;">
+        <p style="color: #fca5a5; font-family: monospace;"><b>Error:</b> {{ message }}</p>
+    </div>
+    
+    <p style="color: var(--text-secondary); margin-bottom: 2rem;">Please ensure your file is a valid image and you have selected a supported format.</p>
+
+    <a href="{% url 'convert_action' %}" class="btn-primary btn-danger" style="width: auto; padding: 1rem 2rem;">
+        Try Again
+    </a>
+</div>
+{% endblock %}

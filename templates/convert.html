@@ -1,0 +1,86 @@
+ {% extends 'base.html' %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Universal <span class="text-gradient">Processor</span></h1>
+    <p>Upload your file and select the target format. Our <strong style="color: var(--accent-primary);">Factory Pattern</strong> will automatically route it to the correct <strong style="color: var(--accent-primary);">Strategy</strong> algorithm.</p>
+</div>
+
+<div class="form-container">
+    <form method="post" enctype="multipart/form-data" action="{% url 'convert_action' %}">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="file">1. Select File</label>
+            <div class="file-input-wrapper">
+                <input type="file" name="file" id="file" required 
+                    accept=".jpeg,.jpg,.png,.docx,.pdf"
+                    style="position: absolute; width: 100%; height: 100%; 
+                            top: 0; left: 0; opacity: 0; cursor: pointer; z-index: 10;">
+                <div class="placeholder" id="placeholder-text">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" 
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <span>Click to upload or drag & drop</span>
+                    <span style="font-size: 0.8rem; opacity: 0.7;">Supports JPEG, PNG, DOCX, PDF</span>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="target_format">2. Select Target Format</label>
+            <select name="target_format" id="target_format">
+
+                <optgroup label="Convert Images">
+                    <option value="pdf" {% if initial_target == 'pdf' %}selected{% endif %}>
+                        Image to PDF Document (.pdf)
+                    </option>
+                    <option value="png" {% if initial_target == 'png' %}selected{% endif %}>
+                        Image to PNG (.png)
+                    </option>
+                    <option value="jpeg" {% if initial_target == 'jpeg' %}selected{% endif %}>
+                        Image to JPEG (.jpeg)
+                    </option>
+                </optgroup>
+
+                <optgroup label="Convert Word Document">
+                    <option value="docx_to_pdf" {% if initial_target == 'docx_to_pdf' %}selected{% endif %}>
+                        Word to PDF Document (.pdf)
+                    </option>
+                </optgroup>
+
+            </select>
+        </div>
+
+        <button type="submit" class="btn-primary">
+            Convert & Process
+        </button>
+    </form>
+</div>
+
+<script>
+    // simple script to show selected file name
+    document.getElementById('file').addEventListener('change', function(e) {
+    if (e.target.files.length > 0) {
+        const fileName = e.target.files[0].name;
+        const placeholder = document.querySelector('.placeholder');
+        
+        // We change the appearance without deleting the underlying structure
+        placeholder.innerHTML = `
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+            <span style="color: #10b981; font-weight: bold; display: block; margin-top: 10px;">${fileName}</span>
+            <span style="font-size: 0.8rem; opacity: 0.7;">File selected and ready!</span>
+        `;
+        
+        // Optional: Add a "success" border to the wrapper
+        document.querySelector('.file-input-wrapper').style.borderColor = '#10b981';
+    }
+});
+</script>
+{% endblock %}
