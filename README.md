@@ -15,13 +15,23 @@ LayerTechnologyBackendDjango 5.0.0Image ProcessingPillow 10.2.0Web ServerGunicor
 
 📁 Project Structure
 Multi-Format-Image-File-Converter/
+
 ├── converters/        # Converter classes (design pattern implementations)
+
 ├── core/              # Django app — views, models, URLs
+
 ├── main/              # Project settings and WSGI entry point
+
 ├── media/             # Uploaded and converted media files
+
 ├── static/css/        # Stylesheets
+
 ├── templates/         # HTML templates
+
 ├── manage.py          # Django management script
+
 ├── requirements.txt   # Python dependencies
+
 ├── Procfile           # Heroku deployment config
+
 └── db.sqlite3         # SQLite database
